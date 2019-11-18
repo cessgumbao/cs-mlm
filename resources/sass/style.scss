@@ -1,0 +1,90 @@
+main, footer {
+    padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    .container {
+        width: 95%;
+    }
+}
+
+html, body { height: 100% ; color: #58595f;;}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    font-size: 14px;
+}
+
+.modal { font-size: 14px;}
+
+.container { margin-top: 10px; }
+
+#app { height: 100%; }
+.sidenav .collapsible-header, .sidenav.fixed .collapsible-header { padding: 0 32px; }
+
+.margin { margin: 0 !important; }
+.login-text { margin-top: -6px; margin-left: -6px !important;}
+.medium-small { 
+    font-size: 0.9rem;
+    margin: 0;
+    padding: 0;
+}
+.invalid-feedback {
+    font-size: 12px;
+    color: red;
+}
+.breadcrumb { 
+    color: #ff7043;
+    font-size: 12px;
+}
+.breadcrumb:before  {
+    color: #cecfd6;
+    font-size: 12px;
+}
+ 
+.breadcrumb:last-child {
+color: #58595f ;
+}
+
+.toast-success {
+    background-color: #5ec462;
+    opacity: 0.5;
+}
+
+.toast-warning {
+    background-color: #ffad47;
+    opacity: 0.5;
+}
+
+.toast-error {
+    background-color: #fd6565;
+    opacity: 0.5;
+}
+
+.toast-warning i, .toast-error i, .toast-success i{
+    margin-right: 10px;
+}
+
+.list-inline {
+padding-left: 0;
+margin-left: -5px;
+list-style: none;
+}
+
+.list-inline > li {
+display: inline-block;
+padding-right: 5px;
+padding-left: 5px;
+}
