@@ -23,10 +23,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/pages', function() {
-    return view('test');
-});
-
 // Resources
 Route::resource('members', 'MemberController')->middleware('auth');
 Route::resource('distributors', 'DistributorController')->middleware('auth');
@@ -39,4 +35,6 @@ Route::post('sales/generate-computation', 'SaleController@generateComputation')-
 Route::post('sales/validate', 'SaleController@validateSaleForm')->middleware('auth');
 
 // Get
-Route::get('product_categories/get-products/{category_id}', 'ProductCategoryController@getProducts')->middleware('auth');
+Route::get('sales/my-sales/all', 'SaleController@getMySales')->middleware('auth');  
+
+Route::get('product_categories/get-products/{category_id}', 'ProductCategoryController@getProducts')->middleware('auth'); 

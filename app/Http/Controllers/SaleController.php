@@ -7,7 +7,7 @@ use App\Repositories\ModeOfPaymentRepository;
 use App\Repositories\ProductCategoryRepository;
 use App\Repositories\SaleRepository;
 
-use Validator;
+use Auth;
 
 class SaleController extends Controller
 {
@@ -26,8 +26,13 @@ class SaleController extends Controller
 
     public function index()
     {
-        $sales = $this->sale_repo->all();   
-        return view('sales.index')->withSales($sales);
+        return view('sales.index');
+    }
+
+    public function getMySales(Request $request)
+    {
+        $sales = $this->sale_repo->getMySales($request);   
+        return json_encode($sales);
     }
 
     public function create()

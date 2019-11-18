@@ -21,6 +21,39 @@ class SaleRepository extends Repository implements SaleRepositoryInterface
         $this->setModel($this->model);
     }
 
+    public function getMySales($request)
+    {
+        $my_sales_column = [
+            'sales.id',
+            'sales.total_amount',
+            'sales.net_amount',
+            'sales.discount',
+            'sales.ecash_amount_used',
+            'sales.payment',
+            'sales.payment_change',
+            'sales.created_at',
+            'users.name as buyer',
+            'members.member_id',
+            'mode_of_payments.mode as mode_of_payment',
+        ];
+
+        $all_sales = Auth::user()->hasRole(3) ? true : false;
+
+        $my_sales = $this->model
+            ->leftJoin('users', 'users.id', '=', 'sales.buyer_id')
+            ->leftJoin('members', 'users.id', '=', 'members.user_id')
+            ->leftJoin('mode_of_payments', 'mode_of_payments.id', '=', 'sales.mode_of_payment_id')
+            ->where('sales.seller_id', $all_sales ? '>' : '=', $all_sales ? 0 : Auth::user()->id)
+            ->where('users.name', 'LIKE', '%' . $request->search . '%')
+            ->select($my_sales_column)
+            ->orderBy($request->sort ?? 'id', $request->order)
+            // ->skip($request->offset)
+            // ->take($request->limit)
+            ->get();
+
+        return $my_sales;
+    }
+
     public function validateSaleForm($request)
     {   
         $net_amount = floatval(str_replace(',','', $request->net_amount));

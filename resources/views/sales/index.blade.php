@@ -25,9 +25,13 @@
                     <thead>
                         <tr> 
                             <th data-field="id" data-sortable="true">ID</th>
-                            <th data-field="purchased_by" data-sortable="true">Purchased By</th>
+                            <th data-field="buyer" data-sortable="true">Purchased By</th>
                             <th data-field="total_amount" data-sortable="true">Total Amount</th>
+                            <th data-field="discount" data-sortable="true">Discount</th>
                             <th data-field="net_amount" data-sortable="true">Net Amount</th>
+                            <th data-field="ecash_amount_used" data-sortable="true">E-wallet Cash used</th>
+                            <th data-field="payment" data-sortable="true">Payment</th>
+                            <th data-field="payment_change" data-sortable="true">Change</th>
                             <th data-field="created_at" data-sortable="true">Transaction Date</th>
                         </tr>
                     </thead>
@@ -49,10 +53,12 @@ $(function()
     if(session_status) M.toast({html: '<i class="fa fa-check"></i> ' + session_status, classes: 'toast-success'});
 
     $('#sale_table').bootstrapTable({
-        data : [],
         classes : ['table', 'highlight', 'centered'],
-        search: true,
-        pagination: true
+        toggle: "table",
+        url: '/sales/my-sales/all',
+        search: true, 
+        sidePagination: "server",
+        pagination: true,
     });
 });
 </script>
