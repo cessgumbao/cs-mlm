@@ -47,11 +47,21 @@ class SaleRepository extends Repository implements SaleRepositoryInterface
             ->where('users.name', 'LIKE', '%' . $request->search . '%')
             ->select($my_sales_column)
             ->orderBy($request->sort ?? 'id', $request->order)
-            // ->skip($request->offset)
-            // ->take($request->limit)
+            ->offset($request->offset)
+            ->limit($request->limit)
             ->get();
 
-        return $my_sales;
+        $count = $this->model
+            ->leftJoin('users', 'users.id', '=', 'sales.buyer_id')
+            ->leftJoin('members', 'users.id', '=', 'members.user_id')
+            ->leftJoin('mode_of_payments', 'mode_of_payments.id', '=', 'sales.mode_of_payment_id')
+            ->where('sales.seller_id', $all_sales ? '>' : '=', $all_sales ? 0 : Auth::user()->id)
+            ->where('users.name', 'LIKE', '%' . $request->search . '%')
+            ->select($my_sales_column)
+            ->get()
+            ->count();
+
+        return [ 'sales' => $my_sales, 'total' => $count];
     }
 
     public function validateSaleForm($request)

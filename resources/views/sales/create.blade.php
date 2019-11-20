@@ -249,15 +249,7 @@ $(function() {
 
     // Search Member Table 
     var search_member_table = $('#search_member_table');
-    
-    search_member_table.bootstrapTable({
-        data : [],
-        classes : ['table', 'highlight', 'centered'],
-        search: true,
-        pagination: true,
-        clickToSelect: true,
-        singleSelect: true
-    });
+    search_member_table.bootstrapTable();
 
     // Search member in modal
     search_member_table.on('search.bs.table', function(e) {

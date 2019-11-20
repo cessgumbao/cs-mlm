@@ -1,7 +1,14 @@
 <div id="search_member_modal" class="modal modal-fixed-footer">
     <div class="modal-content">
         <h6><i class="fa fa-search"></i> Search Member</h6>
-        <table id="search_member_table">
+        <table 
+            id="search_member_table" 
+            class="table highlight centered"
+            data-search="true"
+            data-pagination="true"
+            data-click-to-select="true"
+            data-single-select="true"
+            >
             <thead>
                 <tr> 
                     <th data-field="state" data-checkbox="true"></th>
