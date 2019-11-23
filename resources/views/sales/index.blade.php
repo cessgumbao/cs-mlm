@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col s12">
                 <div id="sale_toolbar">
-                    <a class="waves-effect waves-light btn" href="{{ route('sales.create') }}"><i class="fa fa-plus"></i> Create New</a>
+                    <a class="waves-effect waves-light btn btn-small" href="{{ route('sales.create') }}"><i class="fa fa-plus"></i> Create New</a>
                 </div>
                 <div class="card-panel">
                     <table 
@@ -30,7 +30,12 @@
                         data-side-pagination="server"
                         data-pagination="true"
                         data-page-size="10"
-                        data-thead-classes="center-align">
+                        data-thead-classes="center-align"
+                        data-show-columns="true"
+                        data-sort-name="id"
+                        data-sort-order="desc"
+                        data-detail-view="true"
+                        data-detail-formatter="salesOrders">
                         <thead>
                             <tr> 
                                 <th class="th-inner center-align" data-field="id" data-sortable="true">ID</th>
@@ -66,12 +71,31 @@ $(function()
 {
     var session_status = "{{ session('status') }}";
     if(session_status) M.toast({html: '<i class="fa fa-check"></i> ' + session_status, classes: 'toast-success'});
+
     $('#sale_table').bootstrapTable();
 });
 
-function currencyFormatter(value)
+function salesOrders(index, row, detail)
 {
-    return "<div class='right-align green-text text-darken-2'>" + numeral(value).format('0,0[.]00') + "</div>";
+    var html = '<table class="table centered"><thead><tr><th></th><th>Product Name</th><th>Cost</th><th>Quantity</th><th>Total Cost</th></tr></thead><tbody>';
+    detail.html(detailLoader());
+    var result = $.get('/sales/get-sales-orders/' + row.id).done(function(response) {
+        var orders = $.parseJSON(response);
+
+        $.each(orders, function(i, val)
+        {
+            var image = "{!! url('storage/" + val.product.image + "') !!}";
+            html += '<tr>' +
+                '<td><img alt="" src="' + image + '" width="75" height="75"></td>'+
+                '<td>' + val.product.name + '</td>'+
+                '<td>' + numeral(val.product.cost).format('0,0[.]00') + '</td>'+
+                '<td>' + val.quantity + '</td>'+
+                '<td>' + numeral(val.total_cost).format('0,0[.]00') + '</td>'+
+            '</tr>';
+        });
+        html += '</tbody></table>';
+        detail.html(html);
+    });
 }
 </script>
 @endsection

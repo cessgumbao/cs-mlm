@@ -32,7 +32,7 @@
 
                         </div>
                         <div class="step-actions">
-                            <button class="waves-effect waves-dark btn next-step" data-feedback="checkMemberID">Next</button>
+                            <button class="waves-effect waves-dark btn btn-small next-step" data-feedback="checkMemberID">Next</button>
                         </div>
                     </div>
                 </li>
@@ -102,8 +102,8 @@
                             </div>
                         </div>
                         <div class="step-actions">
-                            <button class="waves-effect waves-dark btn previous-step">Back</button>
-                            <button class="waves-effect waves-dark btn next-step" data-feedback="checkProductQuantity">Next</button>
+                            <button class="waves-effect waves-dark btn btn-small previous-step">Back</button>
+                            <button class="waves-effect waves-dark btn btn-small next-step" data-feedback="checkProductQuantity">Next</button>
                         </div>
                     </div>
                 </li>
@@ -186,9 +186,8 @@
                             </div>
                         </div>
                         <div class="step-actions">
-                            <button class="waves-effect waves-dark btn previous-step">Back</button>
-                            <button class="waves-effect waves-dark btn" onclick="completeSale();">Complete</button>
-                            <!-- <input type="button" class="complete_sale waves-effect waves-dark btn" onclick="completeSale();" value="Complete"> -->
+                            <button class="waves-effect waves-dark btn btn-small previous-step">Back</button>
+                            <button class="waves-effect waves-dark btn btn-small" onclick="completeSale();">Complete</button>
                         </div>
                     </div>
                 </li>
@@ -405,7 +404,8 @@ function addToCart(id, name, cost, image, is_set)
 function computeCartTotalAmount()
 {
     var total_amount = 0;
-    $('#product_cart > tbody > tr').each(function() {
+    $('#product_cart > tbody > tr').each(function() 
+    {
         var this_quantity = $(this).find('.product_count').val() ? parseFloat($(this).find('.product_count').val()) : 0;
         var this_cost = parseFloat($(this).find('.product_cost').text());
         total_amount += (this_quantity*this_cost);
@@ -417,7 +417,8 @@ function getSelectedProducts()
 {
     var product_arr = [];
 
-    $('#product_cart tbody > tr').each(function(i, val) {
+    $('#product_cart tbody > tr').each(function(i, val) 
+    {
         var row_class = $(this).attr('class').split('_');
         var product_id = row_class[1];
         

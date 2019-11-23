@@ -36,5 +36,5 @@ Route::post('sales/validate', 'SaleController@validateSaleForm')->middleware('au
 
 // Get
 Route::get('sales/my-sales/all', 'SaleController@getMySales')->middleware('auth');  
-
+Route::get('sales/get-sales-orders/{sales_id}', 'SaleController@getSalesOrders')->middleware('auth');  
 Route::get('product_categories/get-products/{category_id}', 'ProductCategoryController@getProducts')->middleware('auth'); 

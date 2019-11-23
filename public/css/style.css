@@ -91,3 +91,5 @@ padding-left: 5px;
 
 .pagination li.active { background-color: #ff8a65; }
 .pagination li a { font-size: 14px; }
+
+.detail-view { background-color: rgb(245, 245, 245);}

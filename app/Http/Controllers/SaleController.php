@@ -32,12 +32,13 @@ class SaleController extends Controller
     public function getMySales(Request $request)
     {
         $sales = $this->sale_repo->getMySales($request);   
-        // echo json_encode($sales);
-        // exit;
-
         return ['total' => $sales['total'], 'rows' => $sales['sales']];
-
-        return json_encode($sales);
+    }
+    
+    public function getSalesOrders($sales_id)
+    {
+        $sales_order = $this->sale_repo->getSalesOrders($sales_id);
+        return json_encode($sales_order);
     }
 
     public function create()

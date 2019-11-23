@@ -51,6 +51,7 @@ class SaleRepository extends Repository implements SaleRepositoryInterface
             ->limit($request->limit)
             ->get();
 
+        // For total count
         $count = $this->model
             ->leftJoin('users', 'users.id', '=', 'sales.buyer_id')
             ->leftJoin('members', 'users.id', '=', 'members.user_id')
@@ -117,8 +118,26 @@ class SaleRepository extends Repository implements SaleRepositoryInterface
             'ecash_amount_used' => $ecash_used,
             'mode_of_payment_id' => $request->mode_of_payment,
             'payment' => $payment,
-            'payment_change' => $payment_change,
+            'payment_change' => $payment_change
         ]);
+
+        // Create sales orders
+        for($i=0; $i<count($request->product_id); $i++)
+        {
+            $sales->sales_order()->create([
+                'product_id' => $request->product_id[$i],
+                'quantity' => $request->product_count[$i],
+                'total_cost' => $request->product_cost[$i] * $request->product_count[$i]
+            ]);
+        }
+        // foreach($request->products as $product)
+        // {
+        //     $sales->sales_order->create([
+        //         'product_id' => $product->id,
+        //         'quantity' => $product->quantity,
+        //         'total_cost' => $product->cost * $product->quantity,
+        //     ]);
+        // }
 
         return redirect('sales')->with('status', 'Successfully saved!');
     }
@@ -181,5 +200,11 @@ class SaleRepository extends Repository implements SaleRepositoryInterface
             'net_amount' => $net_amount,
             'overriding_commission' => $overriding_commision,
         ];
+    }
+
+    public function getSalesOrders($sales_id)
+    {
+        $sales_orders = $this->model->with('sales_order.product')->where('id', $sales_id)->get()->first()->sales_order;
+        return $sales_orders;
     }
 }

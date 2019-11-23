@@ -14,6 +14,7 @@ class AddSalesOrdersForeign extends Migration
     public function up()
     {
         Schema::table('sales_orders', function (Blueprint $table) {
+            $table->foreign('sales_id')->references('id')->on('sales')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }

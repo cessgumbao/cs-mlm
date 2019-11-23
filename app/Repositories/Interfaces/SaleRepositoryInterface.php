@@ -8,6 +8,7 @@ interface SaleRepositoryInterface
 {
     public function getMySales($my_id);
     public function completeSale($request);
+    public function getSalesOrders($sales_id);
     public function generateComputation($request);
     public function validateSaleForm($request);
 }

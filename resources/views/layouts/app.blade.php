@@ -35,13 +35,13 @@
 
 </header>
 
-<main> 
+<main id="app"> 
     @yield('content') 
 </main>
 
 <footer class="page-footer white">
     <div class="preloader-wrapper small">
-        <div class="spinner-layer spinner-green-only">
+        <div class="spinner-layer spinner-blue-only">
             <div class="circle-clipper left">
                 <div class="circle"></div>
             </div><div class="gap-patch">

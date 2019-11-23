@@ -69076,6 +69076,14 @@ window.formatCurrency = function (input, blur) {
   input[0].setSelectionRange(caret_pos, caret_pos);
 };
 
+window.detailLoader = function () {
+  return '<div class="preloader-wrapper small">' + '<div class="spinner-layer spinner-blue-only">' + '<div class="circle-clipper left">' + '<div class="circle"></div>' + '</div><div class="gap-patch">' + '<div class="circle"></div>' + '</div><div class="circle-clipper right">' + '<div class="circle"></div>' + '</div>' + '</div>' + '</div>';
+};
+
+window.currencyFormatter = function (value) {
+  return "<div class='right-align green-text text-darken-2'>" + numeral(value).format('0,0[.]00') + "</div>";
+};
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":
