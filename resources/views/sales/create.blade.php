@@ -42,8 +42,9 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <div class="card-panel blue lighten-5">  
-                                        <span class="grey-text"><i class="fa fa-info-circle"></i> First time buyers must have a minimum purchase of two sets of Spectra products to become a 3-star member.</span>
+                                    <div class="chip chip_message_info">
+                                        First time buyers must have a minimum purchase of two sets of Spectra products to become a 3-star member.
+                                        <i class="close material-icons">close</i>
                                     </div>
                                 </div>
                             </div>
@@ -274,7 +275,7 @@ $(function() {
         if($.trim(selected))
         {
             $('.products').css('display', 'block');
-            
+            $('.products .collection').html(myLoader());
             $.get('/product_categories/get-products/' + selected, function(response) 
             {
                 var list = '';

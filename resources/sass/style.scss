@@ -93,3 +93,27 @@ padding-left: 5px;
 .pagination li a { font-size: 14px; }
 
 .detail-view { background-color: rgb(245, 245, 245);}
+
+.bootstrap-table .fixed-table-container .fixed-table-body .fixed-table-loading { z-index: 1;}
+
+.chip_message_info,
+.chip_message_warning,
+.chip_message_alert {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    min-height: 50px;
+    width: 100%;
+    border-radius: 0;
+}
+
+.chip_message_info {
+    background-color: #bbdefb !important;
+}
+
+.chip_message_warning {
+    background-color: #ffcc80 !important;
+}
+
+.chip_message_alert {
+    background-color: #ef9a9a !important;
+}

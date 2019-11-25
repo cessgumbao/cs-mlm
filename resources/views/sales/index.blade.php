@@ -11,7 +11,7 @@
     </div>
     <div class="row"> 
         <div class="col s12 m12 l12">
-            <h5><i class="fa fa-file-invoice-dollar"></i> Sales </h5>
+            <h5>Sales </h5>
         </div>
         <div class="row">
             <div class="col s12">
@@ -38,16 +38,16 @@
                         data-detail-formatter="salesOrders">
                         <thead>
                             <tr> 
-                                <th class="th-inner center-align" data-field="id" data-sortable="true">ID</th>
+                                <th class="th-inner" data-width="55" data-align="center" data-field="id" data-sortable="true">ID</th>
                                 <th class="th-inner" data-field="buyer" data-sortable="true">Purchased By</th>
                                 <th class="th-inner" data-field="total_amount" data-sortable="true" data-formatter="currencyFormatter">Total Amount</th>
                                 <th class="th-inner" data-field="discount" data-sortable="true" data-formatter="currencyFormatter">Discount</th>
                                 <th class="th-inner" data-field="net_amount" data-sortable="true" data-formatter="currencyFormatter">Net Amount</th>
-                                <th class="th-inner" data-field="ecash_amount_used" data-sortable="true" data-formatter="currencyFormatter">E-wallet Cash used</th>
+                                <th class="th-inner" data-field="ecash_amount_used" data-sortable="true" data-formatter="currencyFormatter">E-wallet Cash Used</th>
                                 <th class="th-inner" data-field="payment" data-sortable="true" data-formatter="currencyFormatter">Payment</th>
                                 <th class="th-inner" data-field="payment_change" data-sortable="true" data-formatter="currencyFormatter">Change</th>
-                                <th class="th-inner center-align" data-field="created_at" data-sortable="true">Transaction Date</th>
-                                <th class="th-inner center-align" data-field="action">Action</th>
+                                <th class="th-inner" data-align="center" data-field="created_at" data-sortable="true">Transaction Date</th>
+                                <th class="th-inner" data-align="center" data-field="action" data-formatter="actionFormatter">Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -77,25 +77,34 @@ $(function()
 
 function salesOrders(index, row, detail)
 {
-    var html = '<table class="table centered"><thead><tr><th></th><th>Product Name</th><th>Cost</th><th>Quantity</th><th>Total Cost</th></tr></thead><tbody>';
-    detail.html(detailLoader());
-    var result = $.get('/sales/get-sales-orders/' + row.id).done(function(response) {
-        var orders = $.parseJSON(response);
+    detail.html(myLoader());
 
-        $.each(orders, function(i, val)
+    $.get('/sales/get-sales-orders/' + row.id, function(response) {
+        var html = '<table class="table centered"><thead><tr><th></th><th>Product Name</th><th>Cost</th><th>Quantity</th><th>Total Cost</th></tr></thead><tbody>';
+        var orders = $.parseJSON(response);
+        
+        if(orders.length)
         {
-            var image = "{!! url('storage/" + val.product.image + "') !!}";
-            html += '<tr>' +
-                '<td><img alt="" src="' + image + '" width="75" height="75"></td>'+
-                '<td>' + val.product.name + '</td>'+
-                '<td>' + numeral(val.product.cost).format('0,0[.]00') + '</td>'+
-                '<td>' + val.quantity + '</td>'+
-                '<td>' + numeral(val.total_cost).format('0,0[.]00') + '</td>'+
-            '</tr>';
-        });
-        html += '</tbody></table>';
-        detail.html(html);
+            $.each(orders, function(i, val)
+            {
+                var image = "{!! url('storage/" + val.product.image + "') !!}";
+                html += '<tr>' +
+                    '<td><img alt="" src="' + image + '" width="75" height="75"></td>'+
+                    '<td>' + val.product.name + '</td>'+
+                    '<td>' + numeral(val.product.cost).format('0,0[.]00') + '</td>'+
+                    '<td>' + val.quantity + '</td>'+
+                    '<td>' + numeral(val.total_cost).format('0,0[.]00') + '</td>'+
+                '</tr>';
+            });
+            html += '</tbody></table>';
+            detail.html(html);
+        }
+        else detail.html('No items found')
     });
+}
+
+function actionFormatter(value, row, index) {
+    return '<a class="view_invoice" href="javascript:void(0)" title="View Invoice"><i class="fa fa-receipt fa-lg"></i></a>';
 }
 </script>
 @endsection

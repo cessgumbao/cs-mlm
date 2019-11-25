@@ -35,8 +35,8 @@
 
 </header>
 
-<main id="app"> 
-    @yield('content') 
+<main> 
+    <div id="app">@yield('content')</div> 
 </main>
 
 <footer class="page-footer white">

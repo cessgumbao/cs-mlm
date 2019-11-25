@@ -69076,7 +69076,7 @@ window.formatCurrency = function (input, blur) {
   input[0].setSelectionRange(caret_pos, caret_pos);
 };
 
-window.detailLoader = function () {
+window.myLoader = function () {
   return '<div class="preloader-wrapper small">' + '<div class="spinner-layer spinner-blue-only">' + '<div class="circle-clipper left">' + '<div class="circle"></div>' + '</div><div class="gap-patch">' + '<div class="circle"></div>' + '</div><div class="circle-clipper right">' + '<div class="circle"></div>' + '</div>' + '</div>' + '</div>';
 };
 
