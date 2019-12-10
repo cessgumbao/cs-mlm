@@ -4,6 +4,7 @@
 @can('browse_sales')
 <div class="container"> 
     <div class="row">
+        <h5 class="white-text">Sales </h5>
         <div class="col s12 m12 l12">
             <a class="breadcrumb" href="{{ url('/home')}}">Dashboard</a>
             <a class="breadcrumb">Sales</a>
@@ -11,7 +12,6 @@
     </div>
     <div class="row"> 
         <div class="col s12 m12 l12">
-            <h5>Sales </h5>
         </div>
         <div class="row">
             <div class="col s12">
@@ -23,7 +23,7 @@
                         class="table table-sm" 
                         id="sale_table" 
                         data-toolbar="#sale_toolbar"
-                        data-url="/sales/my-sales/all"
+                        data-url="/members/{{ Auth::user()->id }}/sales"
                         data-search="true"
                         data-show-search-button="true"
                         data-search-on-enter-key="true"
@@ -79,7 +79,7 @@ function salesOrders(index, row, detail)
 {
     detail.html(myLoader());
 
-    $.get('/sales/get-sales-orders/' + row.id, function(response) {
+    $.get('/sales/' + row.id + '/sales_orders', function(response) {
         var html = '<table class="table centered"><thead><tr><th></th><th>Product Name</th><th>Cost</th><th>Quantity</th><th>Total Cost</th></tr></thead><tbody>';
         var orders = $.parseJSON(response);
         

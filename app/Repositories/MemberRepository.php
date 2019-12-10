@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories;
 
@@ -6,6 +6,8 @@ use App\Member;
 
 use App\Repositories\Repository;
 use App\Repositories\Interfaces\MemberRepositoryInterface;
+
+use Validator, Auth;
 
 class MemberRepository extends Repository implements MemberRepositoryInterface
 {
@@ -57,15 +59,13 @@ class MemberRepository extends Repository implements MemberRepositoryInterface
         return isset($member) ? 'true' : 'false';
     }
 
-    public function getProfile($member_id)
+    public function getCompleteProfile($member_id)
     {
         $member_data = [
+            'members.*',
+            'users.*',
             'roles.id as role_id',
-            'members.user_id',
-            'members.member_id',
-            'members.city',
-            'members.region',
-            'users.name as member_name',
+            'roles.display_name as role',
             'member_ranks.name as rank',
             'member_ranks.discount',
             'member_rank_criterias.ecash_reward',
@@ -79,10 +79,55 @@ class MemberRepository extends Repository implements MemberRepositoryInterface
             ->leftJoin('roles', 'roles.id', '=', 'users.role_id')
             ->leftJoin('member_rank_criterias', 'member_rank_criterias.role_id', '=', 'roles.id')
             ->leftJoin('member_ranks', 'member_rank_criterias.member_rank_id', '=', 'member_ranks.id')
-            ->where('members.member_id', '=', $member_id )
+            ->where('members.id', '=', decrypt($member_id))
             ->select($member_data)
             ->first();
 
         return $member_profile;
+    }
+
+    public function checkProfile($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'member_id' => [
+                'exists:members,member_id',
+                function ($attribute, $value, $fail) 
+                {
+                    if ($value === Auth::user()->members->member_id)
+                        $fail('You cannot use your own ID');
+                },
+            ],
+        ], [ 'member_id.exists' => __('validation.exists', ['attribute' => 'Member ID']) ]);
+
+        if ($validator->fails())
+            return [ 'success' => false, 'error' => $validator->errors()->first() ];
+        else
+        {
+            $member_data = [
+                'roles.id as role_id',
+                'members.user_id',
+                'members.member_id',
+                'members.city',
+                'members.region',
+                'users.name as member_name',
+                'member_ranks.name as rank',
+                'member_ranks.discount',
+                'member_rank_criterias.ecash_reward',
+                'member_ecash.ecash'
+            ];
+
+            $member_profile = $this->model
+                ->leftJoin('users', 'users.id', '=', 'members.user_id')
+                ->leftJoin('member_classifications', 'member_classifications.member_id', '=', 'members.id')
+                ->leftJoin('member_ecash', 'users.id', '=', 'member_ecash.user_id')
+                ->leftJoin('roles', 'roles.id', '=', 'users.role_id')
+                ->leftJoin('member_rank_criterias', 'member_rank_criterias.role_id', '=', 'roles.id')
+                ->leftJoin('member_ranks', 'member_rank_criterias.member_rank_id', '=', 'member_ranks.id')
+                ->where('members.member_id', '=', $request->member_id)
+                ->select($member_data)
+                ->first();
+
+            return [ 'success' => true, 'member_profile' => $member_profile ];
+        }
     }
 }

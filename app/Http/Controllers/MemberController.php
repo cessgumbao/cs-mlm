@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Repositories\Interfaces\MemberRepositoryInterface;
-
-use Validator;
-use Auth;
+use App\Repositories\SaleRepository;
 
 class MemberController extends Controller
 {
@@ -37,51 +35,10 @@ class MemberController extends Controller
         return view('members.index')->withMembers($members);
     }
 
-    public function create()
+    public function showProfile($member_id)
     {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        echo $request->all();
-        exit;
-        $validator = Validator::make($request->all(), $this->rules, $this->messages);
-
-        $validatedData = $request->validate( $this->rules );
-        echo $validatedData;
-        exit;
-
-        if ($validator->fails()) 
-        {
-            echo json_encode($validator->errors());
-            exit;
-        }
-            // return ["success" => false, "error" => $validator->errors()->first()];
-        else 
-        {
-
-        }
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        $profile = $this->member_repo->getCompleteProfile($member_id);
+        return view('profile')->withProfile($profile);
     }
 
     public function search(Request $request)
@@ -92,23 +49,14 @@ class MemberController extends Controller
 
     public function check(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'member_id' => [
-                'exists:members,member_id',
-                function ($attribute, $value, $fail) {
-                    if ($value === Auth::user()->members->member_id) {
-                        $fail('You cannot use your own ID');
-                    }
-                },
-            ],
-        ], [ 'member_id.exists' => __('validation.exists', ['attribute' => 'Member ID']) ]);
+        $result = $this->member_repo->checkProfile($request);
+        return $result;
+    }
 
-        if ($validator->fails())
-            return [ 'success' => false, 'error' => $validator->errors()->first() ];
-        else
-        {
-            $member_profile = $this->member_repo->getProfile($request->member_id);
-            return [ 'success' => true, 'member_profile' => $member_profile ];
-        }
+    public function getSales($user_id, Request $request)
+    {
+        $sale_repo = new SaleRepository;
+        $sales = $sale_repo->getMemberSales($user_id, $request);   
+        return ['total' => $sales['total'], 'rows' => $sales['sales']];
     }
 }

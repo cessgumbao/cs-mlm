@@ -10,192 +10,195 @@
             <a class="breadcrumb">Create</a>
         </div>
     </div>
-    <form id="sale_form" method="POST" action="{{ route('sales.store') }}">
-    @csrf
-    <div class="row">
-        <div class="col s12 m12 l12">
-            <ul class="stepper linear">
-                <li class="step active">
-                    <div class="step-title waves-effect">Enter Member ID</div>
-                    <div class="step-content">
-                        <div class="row">
-                            <div class="col s11 m11 l11">
-                                <div class="input-field">
-                                    <input class="validate" type="text" id="member_id" name="member_id" required>
-                                    <label for="member_id">Member ID</label>
-                                </div>
-                            </div>
-                            <div class="col s1 m1 l1">
-                                <a class="modal-trigger" href="#search_member_modal"><i class="fa fa-search teal-text"></i></a>
-                                @include('sales.modals.search_member')
-                            </div>
-
-                        </div>
-                        <div class="step-actions">
-                            <button class="waves-effect waves-dark btn btn-small next-step" data-feedback="checkMemberID">Next</button>
-                        </div>
-                    </div>
-                </li>
-                <li class="step">
-                    <div class="step-title waves-effect">Choose Products</div>
-                    <div class="step-content">
-                        <div class="container">
+    <div class="card-panel">
+        <form id="sale_form" method="POST" action="{{ route('sales.store') }}">
+        @csrf
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <ul class="stepper linear">
+                    <li class="step active">
+                        <div class="step-title waves-effect">Enter Member ID</div>
+                        <div class="step-content">
                             <div class="row">
-                                <div class="col s12 m12 l12">
-                                    <div class="chip chip_message_info">
-                                        First time buyers must have a minimum purchase of two sets of Spectra products to become a 3-star member.
-                                        <i class="close material-icons">close</i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 m5 l5">
+                                <div class="col s11 m11 l11">
                                     <div class="input-field">
-                                        <select name="product_category" id="product_category" placeholder="Product Categories">
-                                            <option value=""></option>
-                                            @foreach($categories as $product_category)
-                                                <option value="{{ $product_category->id }}"> {{ $product_category->category_name }} </option>
-                                            @endforeach
-                                        </select>
-                                        <label for="product_category" class="center-align">Select a Category</label>
+                                        <input class="validate" type="text" id="member_id" name="member_id" required>
+                                        <label for="member_id">Member ID</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 m12 l12">
-                                    <div class="card-panel products">
-                                        <ul class="collection list-inline">
-                                            <!-- list here -->
-                                        </ul>
-                                    </div>
+                                <div class="col s1 m1 l1">
+                                    <a class="modal-trigger" href="#search_member_modal"><i class="fa fa-search teal-text"></i></a>
+                                    @include('sales.modals.search_member')
                                 </div>
+
                             </div>
-                            <div class="row product_summary">                                          
-                                <div class="col s12 m9 l9">
-                                    <div class="row">
-                                        <div class="col s12 m12 l12">
-                                            <i class="fa fa-shopping-cart"></i> Cart
-                                            <div class="card-panel selected_products_container">
-                                                <table id="product_cart">
-                                                    <thead>
-                                                        <tr> 
-                                                            <!-- <th data-field="id" data-visible="false">ID</th> -->
-                                                            <th data-field="image" width="20"></th>
-                                                            <th data-field="product_name">Product Name</th>
-                                                            <th data-field="product_cost">Product Cost</th>
-                                                            <th data-field="product_quantity" width="15">Quantity</th>
-                                                            <th data-field="actions" width="15"></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody></tbody>
-                                                </table>
-                                            </div>
+                            <div class="step-actions">
+                                <button class="waves-effect waves-dark btn btn-small next-step" data-feedback="checkMemberID">Next</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <div class="step-title waves-effect">Choose Products</div>
+                        <div class="step-content">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col s12 m12 l12">
+                                        <div class="chip chip_message_info">
+                                            First time buyers must have a minimum purchase of two sets of Spectra products to become a 3-star member.
+                                            <i class="close material-icons">close</i>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col s12 m3 l3">
-                                    <div class="container">
-                                        <div class="row right-align"> 
-                                            <i class="fa fa-money-bill"></i> Total Amount: <strong><p id="total_amount">#</p></strong>
+                                <div class="row">
+                                    <div class="col s12 m5 l5">
+                                        <div class="input-field">
+                                            <select name="product_category" id="product_category" placeholder="Product Categories">
+                                                <option value=""></option>
+                                                @foreach($categories as $product_category)
+                                                    <option value="{{ $product_category->id }}"> {{ $product_category->category_name }} </option>
+                                                @endforeach
+                                            </select>
+                                            <label for="product_category" class="center-align">Select a Category</label>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="step-actions">
-                            <button class="waves-effect waves-dark btn btn-small previous-step">Back</button>
-                            <button class="waves-effect waves-dark btn btn-small next-step" data-feedback="checkProductQuantity">Next</button>
-                        </div>
-                    </div>
-                </li>
-                <li class="step">
-                    <div class="step-title waves-effect">Order Summary</div>
-                    <div class="step-content">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col s12 m6 l6">
-                                    <i class="fa fa-address-card"></i> Member's Information
-                                    <div class="card">
-                                        <div class="card-panel">
-                                            <div class="row">
-                                                <div class="col s12 m12 l12">
-                                                    <strong><div> ID <span class="right" id="summary_member_id"></span> </div></strong>
-                                                    <strong><div> Name <span class="right" id="summary_name"></span> </div></strong>
-                                                    <strong><div> City <span class="right" id="summary_city"></span> </div></strong>
-                                                    <strong><div> Region <span class="right" id="summary_region"></span> </div></strong>
-                                                    <strong><div> Rank <span class="right" id="summary_rank"></span> </div></strong>
-                                                    <div class="divider"></div>
-                                                    <strong><div class="blue-text"> Wallet <span class="right" id="summary_wallet"></span> </div></strong>
+                                <div class="row">
+                                    <div class="col s12 m12 l12">
+                                        <div class="card-panel products">
+                                            <ul class="collection list-inline">
+                                                <!-- list here -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row product_summary">                                          
+                                    <div class="col s12 m9 l9">
+                                        <div class="row">
+                                            <div class="col s12 m12 l12">
+                                                <i class="fa fa-shopping-cart"></i> Cart
+                                                <div class="card-panel selected_products_container">
+                                                    <table id="product_cart">
+                                                        <thead>
+                                                            <tr> 
+                                                                <!-- <th data-field="id" data-visible="false">ID</th> -->
+                                                                <th data-field="image" width="20"></th>
+                                                                <th data-field="product_name">Product Name</th>
+                                                                <th data-field="product_cost">Product Cost</th>
+                                                                <th data-field="product_quantity" width="15">Quantity</th>
+                                                                <th data-field="actions" width="15"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col s12 m6 l6">              
-                                    <i class="fa fa-file-invoice-dollar"></i> Summary                
-                                    <div class="card">
-                                        <div class="card-panel">
-                                            <div class="row">
-                                                <div class="col s12 m12 l12">
-                                                    <div> Total Amount <span class="right" id="summary_total"></span><input type="hidden" name="total_amount"></div>
-                                                    <div> Discount<span class="right" id="summary_discount"></span><input type="hidden" name="discount"></div>
-                                                    <div class="divider"></div>
-                                                    <strong><div> Net Amount<span class="right" id="summary_net"></span><input type="hidden" name="net_amount"></div></strong> 
-                                                    <div class="green-text"> Overriding Commission <span class="right" id="summary_oc"></span><input type="hidden" name="overriding_commission"></div> 
-                                                </div>
+                                    <div class="col s12 m3 l3">
+                                        <div class="container">
+                                            <div class="row right-align"> 
+                                                <i class="fa fa-money-bill"></i> Total Amount: <strong><p id="total_amount">#</p></strong>
                                             </div>
-                                            <div class="row">
-                                                <div class="col s12 m12 l12">
-                                                    <div class="input-field">
-                                                        <select name="mode_of_payment" id="mode_of_payment">
-                                                            <option value="" disabled selected>Select mode of payment</option>
-                                                            @foreach($mode_of_payments as $mode_of_payment)
-                                                                <option value="{{ $mode_of_payment->id }}"> {{ $mode_of_payment->mode }} </option>
-                                                            @endforeach
-                                                        </select>
-                                                        <label for="mode_of_payment" class="center-align">Mode of payment</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step-actions">
+                                <button class="waves-effect waves-dark btn btn-small previous-step">Back</button>
+                                <button class="waves-effect waves-dark btn btn-small next-step" data-feedback="checkProductQuantity">Next</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <div class="step-title waves-effect">Order Summary</div>
+                        <div class="step-content">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col s12 m6 l6">
+                                        <i class="fa fa-address-card"></i> Member's Information
+                                        <div class="card">
+                                            <div class="card-panel">
+                                                <div class="row">
+                                                    <div class="col s12 m12 l12">
+                                                        <strong><div> ID <span class="right" id="summary_member_id"></span> </div></strong>
+                                                        <strong><div> Name <span class="right" id="summary_name"></span> </div></strong>
+                                                        <strong><div> City <span class="right" id="summary_city"></span> </div></strong>
+                                                        <strong><div> Region <span class="right" id="summary_region"></span> </div></strong>
+                                                        <strong><div> Rank <span class="right" id="summary_rank"></span> </div></strong>
+                                                        <div class="divider"></div>
+                                                        <strong><div class="blue-text"> Wallet <span class="right" id="summary_wallet"></span> </div></strong>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col s12 m12 l12">
-                                                    <div class="input-field">
-                                                        <i class="material-icons prefix">account_balance_wallet</i>
-                                                        <input type="text" class="right-align" name="ecash_used" id="ecash_used" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" autocomplete="off" data-type="currency" value="0">
-                                                        <label for="ecash_used">Use cash in wallet</label>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m6 l6">              
+                                        <i class="fa fa-file-invoice-dollar"></i> Summary                
+                                        <div class="card">
+                                            <div class="card-panel">
+                                                <div class="row">
+                                                    <div class="col s12 m12 l12">
+                                                        <div> Total Amount <span class="right" id="summary_total"></span><input type="hidden" name="total_amount"></div>
+                                                        <div> Discount<span class="right" id="summary_discount"></span><input type="hidden" name="discount"></div>
+                                                        <div class="divider"></div>
+                                                        <strong><div> Net Amount<span class="right" id="summary_net"></span><input type="hidden" name="net_amount"></div></strong> 
+                                                        <div class="green-text"> Overriding Commission <span class="right" id="summary_oc"></span><input type="hidden" name="overriding_commission"></div> 
                                                     </div>
-                                                    <div class="input-field">
-                                                        <i class="material-icons prefix">payment</i>
-                                                        <input type="text" class="right-align" name="payment" id="payment" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" autocomplete="off" data-type="currency" value="0">
-                                                        <label for="payment">Payment (Physical)</label>
-                                                    </div>  
-                                                    <div class="input-field">
-                                                        <i class="fa fa-calculator prefix"></i>
-                                                        <input type="text" class="right-align" name="total_payment" id="total_payment" value="0" disabled>
-                                                        <label for="total_payment">Total Payment</label>
-                                                    </div>  
-                                                    <div class="input-field">
-                                                        <i class="fa fa-coins prefix"></i>
-                                                        <input type="text" class="right-align" name="payment_change" id="payment_change" value="0" readonly>
-                                                        <label for="payment_change">Change</label>
-                                                    </div>  
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col s12 m12 l12">
+                                                        <div class="input-field">
+                                                            <select name="mode_of_payment" id="mode_of_payment">
+                                                                <option value="" disabled selected>Select mode of payment</option>
+                                                                @foreach($mode_of_payments as $mode_of_payment)
+                                                                    <option value="{{ $mode_of_payment->id }}"> {{ $mode_of_payment->mode }} </option>
+                                                                @endforeach
+                                                            </select>
+                                                            <label for="mode_of_payment" class="center-align">Mode of payment</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col s12 m12 l12">
+                                                        <div class="input-field">
+                                                            <i class="material-icons prefix">account_balance_wallet</i>
+                                                            <input type="text" class="right-align" name="ecash_used" id="ecash_used" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" autocomplete="off" data-type="currency" value="0">
+                                                            <label for="ecash_used">Use cash in wallet</label>
+                                                        </div>
+                                                        <div class="input-field">
+                                                            <i class="material-icons prefix">payment</i>
+                                                            <input type="text" class="right-align" name="payment" id="payment" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" autocomplete="off" data-type="currency" value="0">
+                                                            <label for="payment">Payment (Physical)</label>
+                                                        </div>  
+                                                        <div class="input-field">
+                                                            <i class="fa fa-calculator prefix"></i>
+                                                            <input type="text" class="right-align" name="total_payment" id="total_payment" value="0" disabled>
+                                                            <label for="total_payment">Total Payment</label>
+                                                        </div>  
+                                                        <div class="input-field">
+                                                            <i class="fa fa-coins prefix"></i>
+                                                            <input type="text" class="right-align" name="payment_change" id="payment_change" value="0" readonly>
+                                                            <label for="payment_change">Change</label>
+                                                        </div>  
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="step-actions">
+                                <button class="waves-effect waves-dark btn btn-small previous-step">Back</button>
+                                <button class="waves-effect waves-dark btn btn-small" onclick="completeSale();">Complete</button>
+                            </div>
                         </div>
-                        <div class="step-actions">
-                            <button class="waves-effect waves-dark btn btn-small previous-step">Back</button>
-                            <button class="waves-effect waves-dark btn btn-small" onclick="completeSale();">Complete</button>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div> 
-    </form>
+                    </li>
+                </ul>
+            </div>
+        </div> 
+        </form>
+    </div>
+    
 </div>
 @else
     <div class="row"> <div class="col s12">{!! setting('site.401_error') !!}</div> </div>
@@ -276,7 +279,7 @@ $(function() {
         {
             $('.products').css('display', 'block');
             $('.products .collection').html(myLoader());
-            $.get('/product_categories/get-products/' + selected, function(response) 
+            $.get('/product_categories/' + selected + '/products', function(response) 
             {
                 var list = '';
 
@@ -330,7 +333,7 @@ function checkMemberID(destroyFeedback, form, activeStepContent)
 {
     var member_input = $('#member_id').val();
 
-    $.post('/members/check/', { member_id : member_input, _token : '{{ csrf_token() }}'}, function(response) {
+    $.post('/members/check', { member_id : member_input, _token : '{{ csrf_token() }}'}, function(response) {
         if (response.success) 
         {
             member_profile = response.member_profile;
@@ -361,7 +364,7 @@ function checkProductQuantity(destroyFeedback, form, activeStepContent)
 
     if (quantity_exist)     
     {
-        $.post('/sales/generate-computation', 
+        $.post('/sales/compute', 
         { 
             member_profile : member_profile,
             products : getSelectedProducts(),

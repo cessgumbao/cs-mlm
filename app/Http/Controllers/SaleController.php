@@ -29,12 +29,6 @@ class SaleController extends Controller
         return view('sales.index');
     }
 
-    public function getMySales(Request $request)
-    {
-        $sales = $this->sale_repo->getMySales($request);   
-        return ['total' => $sales['total'], 'rows' => $sales['sales']];
-    }
-    
     public function getSalesOrders($sales_id)
     {
         $sales_order = $this->sale_repo->getSalesOrders($sales_id);

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Distributors')
 @section('content')
-<!-- <div class=""> -->
 @can('browse_distributors')
+<div class="container">
     <div class="row"> 
         <div class="valign-wrapper">
             <div class="col s9 m6 l6">
@@ -29,10 +29,10 @@
             </table>
         </div>
     </div>
+</div>
 @else
     <div class="row"> <div class="col s12">{!! setting('site.401_error') !!}</div> </div>
 @endcan
-<!-- </div> -->
 @endsection
 @section('script')
 <script>

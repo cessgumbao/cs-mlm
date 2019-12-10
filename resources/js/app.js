@@ -15,6 +15,8 @@ window.cities = require('philippines/cities');
 
 window.Vue = require('vue');
 window.numeral = require('numeral');
+window.Chart = require('chart.js');
+Chart.platform.disableCSSInjection = true;
 
 /**
  * The following block of code may be used to automatically register your

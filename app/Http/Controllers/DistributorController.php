@@ -16,9 +16,6 @@ class DistributorController extends Controller
      */
     public function index()
     {
-        // $this->authorize('browse_distributors');
-        // $this->authorize('view', Distributor::class);
-
         $distributor = Distributor::all();
         return view('distributors.index')->withDistributor($distributor);
     }

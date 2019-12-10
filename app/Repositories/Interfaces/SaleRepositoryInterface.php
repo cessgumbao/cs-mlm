@@ -2,11 +2,9 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Sale;
-
 interface SaleRepositoryInterface
 {
-    public function getMySales($my_id);
+    public function getMemberSales($user_id, $request);
     public function completeSale($request);
     public function getSalesOrders($sales_id);
     public function generateComputation($request);

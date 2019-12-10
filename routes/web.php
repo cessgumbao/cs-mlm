@@ -31,10 +31,11 @@ Route::resource('sales', 'SaleController')->middleware('auth');
 // Post
 Route::post('members/search', 'MemberController@search')->middleware('auth');
 Route::post('members/check', 'MemberController@check')->middleware('auth');
-Route::post('sales/generate-computation', 'SaleController@generateComputation')->middleware('auth');
+Route::post('sales/compute', 'SaleController@generateComputation')->middleware('auth');
 Route::post('sales/validate', 'SaleController@validateSaleForm')->middleware('auth');
 
 // Get
-Route::get('sales/my-sales/all', 'SaleController@getMySales')->middleware('auth');  
-Route::get('sales/get-sales-orders/{sales_id}', 'SaleController@getSalesOrders')->middleware('auth');  
-Route::get('product_categories/get-products/{category_id}', 'ProductCategoryController@getProducts')->middleware('auth'); 
+Route::get('members/{member_id}/profile', ['as' => 'member.profile', 'uses' => 'MemberController@showProfile'])->middleware('auth');
+Route::get('members/{user_id}/sales', 'MemberController@getSales')->middleware('auth');
+Route::get('sales/{sale_id}/sales_orders', 'SaleController@getSalesOrders')->middleware('auth');    
+Route::get('product_categories/{category_id}/products', 'ProductCategoryController@getProducts')->middleware('auth');

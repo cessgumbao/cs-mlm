@@ -9,7 +9,10 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-use App\Repositories\Interfaces\MemberRepositoryInterface;
+use App\Repositories\MemberRepository;
+use App\Repositories\RegisterRepository;
+use App\Repositories\UserRepository;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -32,18 +35,17 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-
-    protected $member_repo;
+    protected $register_repo;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(MemberRepositoryInterface $member_repo)
+    public function __construct()
     {
         $this->middleware('guest');
-        $this->member_repo = $member_repo;
+        $this->register_repo = new RegisterRepository;
     }
 
     /**
@@ -54,14 +56,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'city' => ['required'],
-            'region' => ['required'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        return $this->register_repo->validate($data);
     }
 
     /**
@@ -72,21 +67,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        $user_repo = new UserRepository;
+        $user = $user_repo->create([
             'role_id' => 2,
             'name' => $data['first_name'] . " " . $data['middle_name'] . " " . $data['last_name'],
             'avatar' => 'users/default.png',
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make(Str::random(8)),
             'settings' => '{"locale":"en"}',
         ]);
 
+        $this->createMember($data, $user);
+        return $user;
+    }
+
+    protected function createMember($data, $user)
+    {
+        $member_repo = new MemberRepository;
+
         // member_id = YYMM4DIGITSEQUENCE ex. 11160001, 12250010
-        $last_sequence = $this->member_repo->getLastSequence();
+        $last_sequence = $member_repo->getLastSequence();
         $member_id = isset($last_sequence) ? date('y') . date('m') .sprintf('%04d', $last_sequence->sequence+1) : date('y') . date('m') . '0001';
         $sequence = isset($last_sequence) ? $last_sequence->sequence + 1 : 1;
 
-        Member::create([
+        $member_repo->create([
             'user_id' => $user->id,
             'member_id' => $member_id,
             'sequence' => $sequence,
@@ -94,13 +98,12 @@ class RegisterController extends Controller
             'first_name' => $data['first_name'],
             'middle_name' => $data['middle_name'],
             'last_name' => $data['last_name'],
+            'birtdate' => $data['birthdate'],
             'address' => $data['address'],
             'city' => $data['city'],
             'region' => $data['region'],
             'gender' => $data['gender'],
             'verified' => 0
         ]);
-
-        return $user;
     }
 }

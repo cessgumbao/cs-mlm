@@ -21,7 +21,7 @@ class SaleRepository extends Repository implements SaleRepositoryInterface
         $this->setModel($this->model);
     }
 
-    public function getMySales($request)
+    public function getMemberSales($user_id, $request)
     {
         $my_sales_column = [
             'sales.id',
@@ -43,7 +43,7 @@ class SaleRepository extends Repository implements SaleRepositoryInterface
             ->leftJoin('users', 'users.id', '=', 'sales.buyer_id')
             ->leftJoin('members', 'users.id', '=', 'members.user_id')
             ->leftJoin('mode_of_payments', 'mode_of_payments.id', '=', 'sales.mode_of_payment_id')
-            ->where('sales.seller_id', $all_sales ? '>' : '=', $all_sales ? 0 : Auth::user()->id)
+            ->where('sales.seller_id', $all_sales ? '>' : '=', $all_sales ? 0 : $user_id)
             ->where('users.name', 'LIKE', '%' . $request->search . '%')
             ->select($my_sales_column)
             ->orderBy($request->sort ?? 'id', $request->order)

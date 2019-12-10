@@ -22,6 +22,7 @@ class CreateMembersTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
+            $table->date('birthdate')->nullable();
             $table->longText('address')->nullable();
             $table->string('city')->nullable();
             $table->string('region')->nullable();

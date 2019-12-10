@@ -8,10 +8,10 @@
     <!-- CSS  -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">  
     <link rel="shortcut icon" href="{{ Voyager::image(Voyager::setting('admin.icon_image', '')) }}" type="image/png">
+    <link rel="stylesheet" href="https://unpkg.com/materialize-stepper@3.1.0/dist/css/mstepper.css">
     
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{ mix('css/style.css') }}">
-    <link rel="stylesheet" href="https://unpkg.com/materialize-stepper@3.1.0/dist/css/mstepper.css">
 
 
     @yield('style')
@@ -29,6 +29,7 @@
             $('.datepicker').datepicker();
             $('.sidenav').sidenav();
             $('.sidenav-dropdown-trigger').dropdown({ coverTrigger: false, hover: true, alignment: 'right'});
+            $('.navbar-dropdown-trigger').dropdown({ coverTrigger: false, constrainWidth: false});
             $('.collapsible').collapsible();
         });
     </script>
