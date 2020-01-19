@@ -1,7 +1,7 @@
 @extends('layouts.head')
 @section('title', 'Login')
 @section('app')
-<div id="app" class="valign-wrapper deep-orange lighten-1">
+<div id="app" class="valign-wrapper gradient-90deg-deep-orange-orange">
     <div class="container">
         <div class="row">
             <div class="col s12 m4 offset-m4 z-depth-4 card-panel">

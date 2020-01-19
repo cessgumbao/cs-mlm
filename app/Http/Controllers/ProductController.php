@@ -3,22 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Distributor;
+use App\Repositories\ProductRepository;
 use Auth;
 
-class DistributorController extends Controller
+class ProductController extends Controller
 {
+    protected $product_repo;
+
+    public function __construct() 
+    {
+        $this->product_repo = new ProductRepository;
+    }
+
+    public function getProducts(Request $request)
+    {
+        $products = $this->product_repo->getProducts($request);
+        return ['total' => $products['total'], 'rows' => $products['products']];
+    }
 
     /**
-     * Display a listing of the resource.   
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $distributor = Distributor::all();
-        if(Auth::user()->hasPermission('browse_distributors')) return view('distributors.index')->withDistributor($distributor);
+        if(Auth::user()->hasPermission('browse_products')) return view('products.index');
         else abort(403, 'Unauthorized action.');
     }
 

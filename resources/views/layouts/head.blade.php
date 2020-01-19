@@ -6,7 +6,6 @@
     <title>{{ config('app.name') }} - @yield('title') </title>
 
     <!-- CSS  -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">  
     <link rel="shortcut icon" href="{{ Voyager::image(Voyager::setting('admin.icon_image', '')) }}" type="image/png">
     <link rel="stylesheet" href="https://unpkg.com/materialize-stepper@3.1.0/dist/css/mstepper.css">
     
@@ -29,8 +28,9 @@
             $('.datepicker').datepicker();
             $('.sidenav').sidenav();
             $('.sidenav-dropdown-trigger').dropdown({ coverTrigger: false, hover: true, alignment: 'right'});
-            $('.navbar-dropdown-trigger').dropdown({ coverTrigger: false, constrainWidth: false});
+            $('.navbar-dropdown-trigger').dropdown({ coverTrigger: false, constrainWidth: false, alignment: 'left'});
             $('.collapsible').collapsible();
+            $('.tooltipped').tooltip();
         });
     </script>
 

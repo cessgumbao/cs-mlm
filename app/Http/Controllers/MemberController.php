@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Repositories\Interfaces\MemberRepositoryInterface;
 use App\Repositories\SaleRepository;
+use Auth;
 
 class MemberController extends Controller
 {
@@ -32,7 +33,8 @@ class MemberController extends Controller
     public function index()
     {
         $members = $this->member_repo->all();   
-        return view('members.index')->withMembers($members);
+        if(Auth::user()->hasPermission('browse_members')) return view('members.index')->withMembers($members);
+        else abort(403, 'Unauthorized action.');
     }
 
     public function showProfile($member_id)

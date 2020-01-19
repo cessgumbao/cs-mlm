@@ -11,7 +11,27 @@
                 </div>
                 <ul id="nav-mobile" class="right">  
                     <li>
-                        <a href="#" class="waves-effect waves-block waves-light"><i class="material-icons">notifications_none <small class="notification-badge">5</small></i></a>
+                        <a href="#" class="waves-effect waves-block waves-light navbar-dropdown-trigger" data-target='notifications-dropdown' title="Notifications"><i class="material-icons">notifications_none <small class="notification-badge">5</small></i></a>
+                        <ul id='notifications-dropdown' class='dropdown-content'>
+                            <li><a href="javascript:void()" class="grey-text text-darken-1 waves-effect waves-block waves-light"><h6>NOTIFICATIONS <span class="new badge">5</span></h6></a></li>
+                            <li class="divider" tabindex="-1"></li>
+                            <li>
+                                <a href="#!" class="grey-text text-darken-1 waves-effect waves-block waves-light"><i class="material-icons icon-bg-circle cyan small">view_module</i>Sample Notification1</a>
+                                <time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
+                            </li>
+                            <li>
+                                <a href="#!" class="grey-text text-darken-1 waves-effect waves-block waves-light"><i class="material-icons icon-bg-circle red small">cloud</i>Sample Notification1</a>
+                                <time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
+                            </li>
+                            <li>
+                                <a href="#!" class="grey-text text-darken-1 waves-effect waves-block waves-light"><i class="material-icons icon-bg-circle amber small">timeline</i>Sample Notification1</a>
+                                <time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
+                            </li>
+                        </ul>
+                    </li>  
+                     
+                    <li>
+                        <a href="javascript:alert('This page is under construction')" class="waves-effect waves-block waves-light" title="FAQs"><i class="material-icons">help_outline</i></a>
                     </li>  
                     <li>                      
                         <a href="#" class="navbar-dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown">

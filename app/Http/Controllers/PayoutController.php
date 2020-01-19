@@ -4,22 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Distributor;
-use Auth;
-
-class DistributorController extends Controller
+class PayoutController extends Controller
 {
-
     /**
-     * Display a listing of the resource.   
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $distributor = Distributor::all();
-        if(Auth::user()->hasPermission('browse_distributors')) return view('distributors.index')->withDistributor($distributor);
-        else abort(403, 'Unauthorized action.');
+        //
     }
 
     /**

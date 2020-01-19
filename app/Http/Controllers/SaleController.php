@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Repositories\ModeOfPaymentRepository;
 use App\Repositories\ProductCategoryRepository;
 use App\Repositories\SaleRepository;
-
 use Auth;
 
 class SaleController extends Controller
@@ -26,7 +25,8 @@ class SaleController extends Controller
 
     public function index()
     {
-        return view('sales.index');
+        if(Auth::user()->can('browse_sales')) return view('sales.index');
+        else abort(403, 'Unauthorized action.');
     }
 
     public function getSalesOrders($sales_id)

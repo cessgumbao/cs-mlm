@@ -27,6 +27,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('members', 'MemberController')->middleware('auth');
 Route::resource('distributors', 'DistributorController')->middleware('auth');
 Route::resource('sales', 'SaleController')->middleware('auth');
+Route::resource('products', 'ProductController')->middleware('auth');
+Route::resource('purchases', 'PurchaseController')->middleware('auth');
+Route::resource('perks', 'PerkController')->middleware('auth');
 
 // Post
 Route::post('members/search', 'MemberController@search')->middleware('auth');
@@ -39,3 +42,4 @@ Route::get('members/{member_id}/profile', ['as' => 'member.profile', 'uses' => '
 Route::get('members/{user_id}/sales', 'MemberController@getSales')->middleware('auth');
 Route::get('sales/{sale_id}/sales_orders', 'SaleController@getSalesOrders')->middleware('auth');    
 Route::get('product_categories/{category_id}/products', 'ProductCategoryController@getProducts')->middleware('auth');
+Route::get('cs/products', 'ProductController@getProducts')->middleware('auth');
