@@ -5,7 +5,7 @@
             <div class="padding-4">
                 <div class="row">
                     <div class="col s7 m7">
-                        <i class="fa fa-hand-holding-usd fa-2x background-round mt-5 gradient-90deg-light-blue-cyan white-text"></i>
+                        <i class="fa fa-hand-holding-usd fa-2x background-round mt-5 gradient-90deg-deep-orange-orange white-text"></i>
                         <p>Personal Purchases</p>
                     </div>
                     <div class="col s5 m5 right-align">
@@ -21,7 +21,7 @@
             <div class="padding-4">
                 <div class="row">
                     <div class="col s7 m7">
-                        <i class="fa fa-money-bill-wave fa-2x background-round mt-5 gradient-90deg-green-teal white-text"></i>
+                        <i class="fa fa-money-bill-wave fa-2x background-round mt-5 gradient-90deg-deep-orange-orange white-text"></i>
                         <p>Group Team Purchases</p>
                     </div>
                     <div class="col s5 m5 right-align">
@@ -37,7 +37,7 @@
             <div class="padding-4">
                 <div class="row">
                     <div class="col s7 m7">
-                        <i class="fa fa-users fa-2x background-round mt-5 gradient-90deg-red-pink white-text"></i>
+                        <i class="fa fa-users fa-2x background-round mt-5 gradient-90deg-deep-orange-orange white-text"></i>
                         <p>Current Members</p>
                     </div>
                     <div class="col s5 m5 right-align">
@@ -105,7 +105,7 @@
 <div class="row">
     <div class="col l12">
         <div class="card-panel">
-            <h6 class="header m-0">Purchases <a class="waves-effect waves-light btn right gradient-90deg-light-blue-cyan" href="{{ route('purchases.index') }}">Details</a></h6>
+            <h6 class="header m-0">Purchases <a class="waves-effect waves-light btn right" href="{{ route('purchases.index') }}">Details</a></h6>
             <canvas id="personal_group_sales">Your browser does not support the canvas element.</canvas>
         </div>
     </div>
@@ -113,7 +113,7 @@
 <div class="row">
     <div class="col s12 m12 l12">
         <div class="card-panel">
-            <h6 class="header m-0">Recent Personal Purchases <a class="waves-effect waves-light btn right gradient-90deg-light-blue-cyan" href="{{ route('purchases.index') }}">See All</a></h6>
+            <h6 class="header m-0">Recent Personal Purchases <a class="waves-effect waves-light btn right" href="{{ route('purchases.index') }}">See All</a></h6>
             <div class="row">
                 <div class="col s12 m12 l12">
                     <table class="table table-sm" 
@@ -164,7 +164,7 @@
 <div class="row">
     <div class="col s12 m12 l12">
         <div class="card-panel">
-            <h6 class="header m-0">Recent Group Purchases <a class="waves-effect waves-light btn right gradient-90deg-light-blue-cyan" href="{{ route('purchases.index') }}">See All</a></h6>
+            <h6 class="header m-0">Recent Group Purchases <a class="waves-effect waves-light btn right" href="{{ route('purchases.index') }}">See All</a></h6>
             <div class="row">
                 <div class="col s12 m12 l12">
                     <table class="table table-sm" 
@@ -249,7 +249,7 @@
                 </li>
             </ul>
             <div class="center mt-3">
-                <a class="waves-effect waves-light btn gradient-90deg-light-blue-cyan">View All</a>
+                <a class="waves-effect waves-light btn">View All</a>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
 @section('app')
 <header>
     <div class="navbar navbar-fixed">
-        <nav class="navbar-dark gradient-90deg-deep-orange-orange no-shadow">  
+        <nav class="navbar-dark gradient-90deg-dark-pink no-shadow">  
             <div class="nav-wrapper">  
                 <a href="#" data-target="slide-out" class="sidenav-trigger hide-on-large-only"><i class="material-icons white-text lighten-1">menu</i></a>
                 <div class="left header-search-wrapper hide-on-med-and-down" style="width: 40%; margin-left: 320px;">
@@ -75,7 +75,7 @@
 </header>
 
 <main> 
-    <div class="content-wrapper-before gradient-90deg-deep-orange-orange"></div>
+    <div class="content-wrapper-before gradient-90deg-dark-pink"></div>
     <div id="app">
         @yield('content')
     </div> 

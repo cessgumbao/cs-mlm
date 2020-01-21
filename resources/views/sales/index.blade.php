@@ -10,59 +10,54 @@
         </div>
     </div>
 </div>
-@can('browse_sales')
-    <div class="container"> 
-        <div class="row"> 
-            <div class="col s12 m12 l12">
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <div id="sale_toolbar">
-                        <a class="waves-effect waves-light btn btn-small" href="{{ route('sales.create') }}"><i class="fa fa-plus"></i> Create New</a>
-                    </div>
-                    <div class="card-panel">
-                        <table 
-                            class="table table-sm" 
-                            id="sale_table" 
-                            data-toolbar="#sale_toolbar"
-                            data-url="/members/{{ Auth::user()->id }}/sales"
-                            data-search="true"
-                            data-show-search-button="true"
-                            data-search-on-enter-key="true"
-                            data-side-pagination="server"
-                            data-pagination="true"
-                            data-page-size="10"
-                            data-thead-classes="center-align"
-                            data-show-columns="true"
-                            data-sort-name="id"
-                            data-sort-order="desc"
-                            data-detail-view="true"
-                            data-detail-formatter="salesOrders">
-                            <thead>
-                                <tr> 
-                                    <th class="th-inner" data-width="55" data-align="center" data-field="id" data-sortable="true">ID</th>
-                                    <th class="th-inner" data-field="buyer" data-sortable="true">Purchased By</th>
-                                    <th class="th-inner" data-field="total_amount" data-sortable="true" data-formatter="currencyFormatter">Total Amount</th>
-                                    <th class="th-inner" data-field="discount" data-sortable="true" data-formatter="currencyFormatter">Discount</th>
-                                    <th class="th-inner" data-field="net_amount" data-sortable="true" data-formatter="currencyFormatter">Net Amount</th>
-                                    <th class="th-inner" data-field="ecash_amount_used" data-sortable="true" data-formatter="currencyFormatter">E-wallet Cash Used</th>
-                                    <th class="th-inner" data-field="payment" data-sortable="true" data-formatter="currencyFormatter">Payment</th>
-                                    <th class="th-inner" data-field="payment_change" data-sortable="true" data-formatter="currencyFormatter">Change</th>
-                                    <th class="th-inner" data-align="center" data-field="created_at" data-sortable="true">Transaction Date</th>
-                                    <th class="th-inner" data-align="center" data-field="action" data-formatter="actionFormatter">Action</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
+<div class="container"> 
+    <div class="row"> 
+        <div class="col s12 m12 l12">
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div id="sale_toolbar">
+                    <!-- <a class="waves-effect waves-light btn btn-small" href="{{ route('sales.create') }}"><i class="fa fa-plus"></i> Create New</a> -->
+                </div>
+                <div class="card-panel">
+                    <h6 class="header m-0">Sales History</h6>
+                    <table 
+                        class="table table-sm" 
+                        id="sale_table" 
+                        data-toolbar="#sale_toolbar"
+                        data-url="/members/{{ Auth::user()->id }}/sales"
+                        data-search="true"
+                        data-show-search-button="true"
+                        data-search-on-enter-key="true"
+                        data-side-pagination="server"
+                        data-pagination="true"
+                        data-page-size="10"
+                        data-thead-classes="center-align"
+                        data-show-columns="true"
+                        data-sort-name="id"
+                        data-sort-order="desc"
+                        data-detail-view="true"
+                        data-detail-formatter="salesOrders">
+                        <thead>
+                            <tr> 
+                                <th class="th-inner" data-width="55" data-align="center" data-field="id" data-sortable="true">ID</th>
+                                <th class="th-inner" data-field="buyer" data-sortable="true">Purchased By</th>
+                                <th class="th-inner" data-field="total_amount" data-sortable="true" data-formatter="currencyFormatter">Total Amount</th>
+                                <th class="th-inner" data-field="discount" data-sortable="true" data-formatter="currencyFormatter">Discount</th>
+                                <th class="th-inner" data-field="net_amount" data-sortable="true" data-formatter="currencyFormatter">Net Amount</th>
+                                <!-- <th class="th-inner" data-field="ecash_amount_used" data-sortable="true" data-formatter="currencyFormatter">E-wallet Cash Used</th> -->
+                                <th class="th-inner" data-field="payment" data-sortable="true" data-formatter="currencyFormatter">Payment</th>
+                                <th class="th-inner" data-field="payment_change" data-sortable="true" data-formatter="currencyFormatter">Change</th>
+                                <th class="th-inner" data-align="center" data-field="created_at" data-sortable="true">Transaction Date</th>
+                                <th class="th-inner" data-align="center" data-field="action" data-formatter="actionFormatter">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
-        </div> 
-    </div>
-@else
-    <div class="container">
-        <div class="row"> <div class="col s12">{!! setting('site.401_error') !!}</div> </div>
-    </div>
-@endcan
+        </div>
+    </div> 
+</div>
 @endsection
 @section('style')
 <style>

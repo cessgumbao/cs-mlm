@@ -232,6 +232,15 @@ padding-left: 5px;
             box-shadow: 0 6px 20px 0 rgba(185, 246, 202, .5) !important;
 }
 
+.gradient-45deg-white-orange
+{
+      background: #ffffff;
+      background: -webkit-linear-gradient(45deg, #ffffff, #ff9900) !important;
+      background: -moz- oldlinear-gradient(45deg, #ffffff, #ff9900) !important;
+      background:      -o-linear-gradient(45deg, #ffffff, #ff9900) !important;
+      background:         linear-gradient(45deg, #ffffff, #ff9900) !important;
+}
+
 .gradient-90deg-orange-deep-orange
 {
       background: #ffe0b2;
@@ -267,6 +276,14 @@ padding-left: 5px;
       background: -moz- oldlinear-gradient(90deg, #ff5252, #f48fb1) !important;
       background:      -o-linear-gradient(90deg, #ff5252, #f48fb1) !important;
       background:         linear-gradient(90deg, #ff5252, #f48fb1) !important;
+}
+.gradient-90deg-dark-pink
+{
+      background: #ff008d;
+      background: -webkit-linear-gradient(90deg, #ff008d, #f48fb1) !important;
+      background: -moz- oldlinear-gradient(90deg, #ff008d, #f48fb1) !important;
+      background:      -o-linear-gradient(90deg, #ff008d, #f48fb1) !important;
+      background:         linear-gradient(90deg, #ff008d, #f48fb1) !important;
 }
 .gradient-90deg-red-pink.gradient-shadow
 {
@@ -810,7 +827,9 @@ padding-left: 5px;
     border-radius: 50%;
 }
 /* Navbar Notification */
-
+.border-radius-3 {
+    border-radius: 3px!important;
+}
 .border-radius-4 {
     border-radius: 4px!important;
 }

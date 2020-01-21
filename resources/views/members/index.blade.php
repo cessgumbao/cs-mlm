@@ -70,7 +70,7 @@
                 <div class="row">
                     <div class="col s12">
                         @can('add_members')
-                            <a class="waves-effect waves-light btn btn-small modal-trigger gradient-90deg-light-blue-cyan right" href="#register_reseller"><i class="fa fa-plus"></i> Register a Reseller</a>
+                            <a class="waves-effect waves-light btn btn-small modal-trigger right" href="#register_reseller"><i class="fa fa-plus"></i> Register a Reseller</a>
                         @endcan
                         <ul class="tabs">
                             <li class="tab col s3"><a class="active" href="#all_members_tab">All</a></li>
@@ -149,7 +149,7 @@ $(function()
             datasets: [
                 {
                     data: [12, 3, 5],
-                    backgroundColor: [ '#f75353', '#6d6dfd', '#fbfb53']
+                    backgroundColor: [ '#ff9d23', '#5aa73a', '#f48fb1']
                 },
             ]
         },

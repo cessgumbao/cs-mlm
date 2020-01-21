@@ -25,7 +25,7 @@ class SaleController extends Controller
 
     public function index()
     {
-        if(Auth::user()->can('browse_sales')) return view('sales.index');
+        if(Auth::user()->hasPermission('browse_sales')) return view('sales.index');
         else abort(403, 'Unauthorized action.');
     }
 

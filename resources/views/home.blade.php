@@ -20,11 +20,13 @@
             </div>
             <div class="right">
                 <h5 class="white-text">{{ Auth::user()->role->display_name }}</h5>
-                <div class="col s12 m12 l12">
-                    <i class="fa fa-star fa-lg yellow-text"></i>
-                    <i class="fa fa-star fa-lg yellow-text"></i>
-                    <i class="fa fa-star fa-lg yellow-text"></i>
-                </div>
+                @if (Auth::user()->role->display_name == 'Reseller')
+                    <div class="col s12 m12 l12">
+                        <i class="fa fa-star fa-lg yellow-text"></i>
+                        <i class="fa fa-star fa-lg yellow-text"></i>
+                        <i class="fa fa-star fa-lg yellow-text"></i>
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -32,10 +34,21 @@
             @include('dashboards.member')
         @elseif(Auth::user()->hasRole(['city_distributor', 'regional_distributor', 'admin', 'owner']))
             <div class="row">
-                <div class="col l12">
-                    <div class="row">
-                        <div class="col right">
-                            <a class="waves-effect waves-light btn-large gradient-90deg-light-blue-cyan" title="Go to Point of Sales (POS)"><i class="material-icons right">laptop_chromebook</i>Point of Sales</a> 
+                <div class="col s12 m6">
+                    <div class="card gradient-45deg-white-orange border-radius-3">
+                        <div class="card-content">
+                            <img src="{{ url('storage/coin.png' ) }}" alt="images" width="50">
+                        <h5 class="lighten-4 white-text right">DIRECT SELL</h5>
+                        <!-- <p class="white-text lighten-4">On apple watch</p> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="card gradient-45deg-white-orange border-radius-3">
+                        <div class="card-content">
+                        <img src="{{ url('storage/user.png' ) }}" alt="images" width="50">
+                        <h5 class="lighten-4 white-text right">REGISTER A RESELLER</h5>
+                        <!-- <p class="white-text lighten-4">On apple watch</p> -->
                         </div>
                     </div>
                 </div>
