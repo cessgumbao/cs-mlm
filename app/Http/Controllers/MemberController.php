@@ -37,6 +37,11 @@ class MemberController extends Controller
         else abort(403, 'Unauthorized action.');
     }
 
+    public function create()
+    {
+        return view('members.create');
+    }
+
     public function showProfile($member_id)
     {
         $profile = $this->member_repo->getCompleteProfile($member_id);

@@ -30,6 +30,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasPermission('add_members');
         });
 
+        Gate::define('add_payouts', function ($user) {
+            return $user->hasPermission('add_payouts');
+        });
+
         // Gate::define('browse_distributors', function ($user) {
         //     return $user->hasPermission('browse_distributors');
         // });

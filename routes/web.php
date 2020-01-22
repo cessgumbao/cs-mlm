@@ -30,6 +30,7 @@ Route::resource('sales', 'SaleController')->middleware('auth');
 Route::resource('products', 'ProductController')->middleware('auth');
 Route::resource('purchases', 'PurchaseController')->middleware('auth');
 Route::resource('perks', 'PerkController')->middleware('auth');
+Route::resource('commissions', 'CommissionController')->middleware('auth');
 
 // Post
 Route::post('members/search', 'MemberController@search')->middleware('auth');

@@ -33,24 +33,10 @@
         @if(Auth::user()->hasRole('member'))
             @include('dashboards.member')
         @elseif(Auth::user()->hasRole(['city_distributor', 'regional_distributor', 'admin', 'owner']))
-            <div class="row">
-                <div class="col s12 m6">
-                    <div class="card gradient-45deg-white-orange border-radius-3">
-                        <div class="card-content">
-                            <img src="{{ url('storage/coin.png' ) }}" alt="images" width="50">
-                        <h5 class="lighten-4 white-text right">DIRECT SELL</h5>
-                        <!-- <p class="white-text lighten-4">On apple watch</p> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m6">
-                    <div class="card gradient-45deg-white-orange border-radius-3">
-                        <div class="card-content">
-                        <img src="{{ url('storage/user.png' ) }}" alt="images" width="50">
-                        <h5 class="lighten-4 white-text right">REGISTER A RESELLER</h5>
-                        <!-- <p class="white-text lighten-4">On apple watch</p> -->
-                        </div>
-                    </div>
+            <div class="row mb-1">
+                <div class="col right">
+                    <a href="#" class="btn waves-effect waves-light"><i class="fa fa-coins"></i> DIRECT SELL</a>
+                    <a href="#" class="btn waves-effect waves-light"><i class="fa fa-user-plus"></i> REGISTER A RESELLER</a>
                 </div>
             </div>
             @if(Auth::user()->hasRole(['city_distributor', 'regional_distributor']))
@@ -61,4 +47,17 @@
         @endif
     @endif
 </div>  
+@endsection
+@section('style')
+<style>
+    .dashboard_menu .card:hover { 
+        -webkit-box-shadow: 0 6px 20px 0 rgba(255, 204, 188, .5) !important;
+        box-shadow: 0 6px 20px 0 rgba(255, 204, 188, .5) !important;
+        background: #ffffff;
+        background: -webkit-linear-gradient(45deg, #ffffff, #ffb74b) !important;
+        background: -moz- oldlinear-gradient(45deg, #ffffff, #ffb74b) !important;
+        background: -o-linear-gradient(45deg, #ffffff, #ffb74b) !important;
+        background: linear-gradient(45deg, #ffffff, #ffb74b) !important;
+    }
+</style>
 @endsection

@@ -63,74 +63,136 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col s12">
-            <div class="card-panel">
-                <h6 class="header m-0">My Network</h6>
-                <div class="row">
-                    <div class="col s12">
-                        @can('add_members')
-                            <a class="waves-effect waves-light btn btn-small modal-trigger right" href="#register_reseller"><i class="fa fa-plus"></i> Register a Reseller</a>
-                        @endcan
-                        <ul class="tabs">
-                            <li class="tab col s3"><a class="active" href="#all_members_tab">All</a></li>
-                            <li class="tab col s3"><a href="#direct_recruits_tab">Direct Recruits</a></li>
-                        </ul>
-                    </div>
-                    <div id="all_members_tab" class="col s12">
-                        <div id="member_toolbar">
+    @if(Auth::user()->hasRole(['owner', 'admin']))
+        <div class="row">
+            <div class="col s12">
+                <div class="card-panel">
+                    <h6 class="header m-0">Members List</h6>
+                    <div class="row">
+                        <div class="col s12">
+                            @can('add_members')
+                                <a class="waves-effect waves-light btn btn-small modal-trigger right" href="#register_reseller"><i class="fa fa-plus"></i> Register a Reseller</a>
+                            @endcan
+                            <ul class="tabs">
+                                <li class="tab col s3"><a class="active" href="#all_members_tab">All</a></li>
+                                <li class="tab col s3"><a href="#distributors_tab">Distributors</a></li>
+                            </ul>
                         </div>
-                        <table id="all_members_table" 
-                            class="table table-sm"
-                            data-search="true"
-                            data-show-search-button="true"
-                            data-search-on-enter-key="true"
-                            data-toolbar="#member_toolbar"
-                            data-url="/cs/members"
-                            data-side-pagination="server"
-                            data-pagination="true"
-                            data-page-size="10">
-                            <thead>
-                                <tr> 
-                                    <th data-field="member_id" data-sortable="true">Member ID</th>
-                                    <th data-field="member_name" data-sortable="true">Name</th>
-                                    <th data-field="rank" data-sortable="true">Rank</th>
-                                    <th data-field="sponsor_id" data-sortable="true">Sponsor ID</th>
-                                    <th data-field="created_at" data-sortable="true">Date Joined</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <div id="direct_recruits_tab" class="col s12">
-                        <div id="direct_recruits_toolbar">
+                        <div id="all_members_tab" class="col s12">
+                            <table id="all_members_table" 
+                                class="table table-sm"
+                                data-search="true"
+                                data-show-search-button="true"
+                                data-search-on-enter-key="true"
+                                data-url="/cs/members"
+                                data-side-pagination="server"
+                                data-pagination="true"
+                                data-page-size="10">
+                                <thead>
+                                    <tr> 
+                                        <th data-field="member_id" data-sortable="true">Member ID</th>
+                                        <th data-field="member_name" data-sortable="true">Name</th>
+                                        <th data-field="rank" data-sortable="true">Rank</th>
+                                        <th data-field="sponsor_id" data-sortable="true">Sponsor ID</th>
+                                        <th data-field="created_at" data-sortable="true">Date Joined</th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
-                        <table id="direct_recruits_table" 
-                            class="table table-sm"
-                            data-search="true"
-                            data-show-search-button="true"
-                            data-search-on-enter-key="true"
-                            data-toolbar="#direct_recruits_toolbar"
-                            data-url="/cs/members"
-                            data-side-pagination="server"
-                            data-pagination="true"
-                            data-page-size="10">
-                            <thead>
-                                <tr> 
-                                    <th data-field="member_id" data-sortable="true">Member ID</th>
-                                    <th data-field="member_name" data-sortable="true">Name</th>
-                                    <th data-field="rank" data-sortable="true">Rank</th>
-                                    <th data-field="sponsor_id" data-sortable="true">Sponsor ID</th>
-                                    <th data-field="created_at" data-sortable="true">Date Joined</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <div id="distributors_tab" class="col s12">
+                            <table id="distributors_table" 
+                                class="table table-sm"
+                                data-search="true"
+                                data-show-search-button="true"
+                                data-search-on-enter-key="true"
+                                data-url="/cs/members"
+                                data-side-pagination="server"
+                                data-pagination="true"
+                                data-page-size="10">
+                                <thead>
+                                    <tr> 
+                                        <th data-field="member_id" data-sortable="true">Member ID</th>
+                                        <th data-field="member_name" data-sortable="true">Name</th>
+                                        <th data-field="sponsor_id" data-sortable="true">Sponsor ID</th>
+                                        <th data-field="created_at" data-sortable="true">Date Joined</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
+                
             </div>
-            
         </div>
-    </div>
-    
+    @else
+        <div class="row">
+            <div class="col s12">
+                <div class="card-panel">
+                    <h6 class="header m-0">My Network</h6>
+                    <div class="row">
+                        <div class="col s12">
+                            @can('add_members')
+                                <a class="waves-effect waves-light btn btn-small modal-trigger right" href="#register_reseller"><i class="fa fa-plus"></i> Register a Reseller</a>
+                            @endcan
+                            <ul class="tabs">
+                                <li class="tab col s3"><a class="active" href="#all_members_tab">All</a></li>
+                                <li class="tab col s3"><a href="#direct_recruits_tab">Direct Recruits</a></li>
+                            </ul>
+                        </div>
+                        <div id="all_members_tab" class="col s12">
+                            <div id="member_toolbar">
+                            </div>
+                            <table id="all_members_table" 
+                                class="table table-sm"
+                                data-search="true"
+                                data-show-search-button="true"
+                                data-search-on-enter-key="true"
+                                data-toolbar="#member_toolbar"
+                                data-url="/cs/members"
+                                data-side-pagination="server"
+                                data-pagination="true"
+                                data-page-size="10">
+                                <thead>
+                                    <tr> 
+                                        <th data-field="member_id" data-sortable="true">Member ID</th>
+                                        <th data-field="member_name" data-sortable="true">Name</th>
+                                        <th data-field="rank" data-sortable="true">Rank</th>
+                                        <th data-field="sponsor_id" data-sortable="true">Sponsor ID</th>
+                                        <th data-field="created_at" data-sortable="true">Date Joined</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="direct_recruits_tab" class="col s12">
+                            <div id="direct_recruits_toolbar">
+                            </div>
+                            <table id="direct_recruits_table" 
+                                class="table table-sm"
+                                data-search="true"
+                                data-show-search-button="true"
+                                data-search-on-enter-key="true"
+                                data-toolbar="#direct_recruits_toolbar"
+                                data-url="/cs/members"
+                                data-side-pagination="server"
+                                data-pagination="true"
+                                data-page-size="10">
+                                <thead>
+                                    <tr> 
+                                        <th data-field="member_id" data-sortable="true">Member ID</th>
+                                        <th data-field="member_name" data-sortable="true">Name</th>
+                                        <th data-field="rank" data-sortable="true">Rank</th>
+                                        <th data-field="sponsor_id" data-sortable="true">Sponsor ID</th>
+                                        <th data-field="created_at" data-sortable="true">Date Joined</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    @endif
 </div>  
 @endsection
 @section('script')
@@ -139,6 +201,7 @@ $(function()
 {
     $('.tabs').tabs();
     $('#all_members_table').bootstrapTable();
+    $('#distributors_table').bootstrapTable();
     $('#direct_recruits_table').bootstrapTable();
     var members_chart = $('#members');
     
@@ -149,7 +212,7 @@ $(function()
             datasets: [
                 {
                     data: [12, 3, 5],
-                    backgroundColor: [ '#ff9d23', '#5aa73a', '#f48fb1']
+                    backgroundColor: [ '#5aa73a', '#ff9d23', '#f48fb1']
                 },
             ]
         },

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Sales')
 @section('content')
-@can('browse_sales')
 <div class="container">
     <div class="row">
         <div class="col s12">
@@ -198,11 +197,7 @@
         </div> 
         </form>
     </div>
-    
 </div>
-@else
-    <div class="row"> <div class="col s12">{!! setting('site.401_error') !!}</div> </div>
-@endcan
 @endsection
 @section('style')
 <style>

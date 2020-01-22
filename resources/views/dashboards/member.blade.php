@@ -210,7 +210,7 @@
                                 <td>123456789</td>
                                 <td>123456789</td>
                                 <td>Mary Jane</td>
-                                <td><span class="new badge purple lighten-2" data-badge-caption="star"> 5</span></td>
+                                <td><span class="new badge pink lighten-2" data-badge-caption="star"> 5</span></td>
                                 <td>25,000</td>
                                 <td>18,750</td>
                                 <td>123456789</td>
